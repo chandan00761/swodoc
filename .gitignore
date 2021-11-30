@@ -1,0 +1,10 @@
+#editor configs
+.idea
+
+# env file
+.env
+
+# python virtual environment
+
+venv
+.venv
