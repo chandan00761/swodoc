@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from users.models import SWOUser
+
+
+class SWOUserAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(SWOUser, SWOUserAdmin)

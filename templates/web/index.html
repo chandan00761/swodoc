@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'base.html' %}
+
+{# Home page of the application #}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="../../static/tailwind/style.css">
+{% endblock %}
+
+{% block content %}
+    <div class="showcase">
+        <div class="jumbotron">
+            <div class="jumbotron-heading">
+                WELCOME TO
+            </div>
+            <div class="jumbotron-body">
+                STUDENT WELFARE OFFICE DEVELOPERS
+                <br>
+                MNNIT ALLAHABAD
+            </div>
+            <div class="jumbotron-footer">
+                <button>
+                    JOIN US
+                </button>
+                <button>
+                    ABOUT US
+                </button>
+            </div>
+        </div>
+        <div>
+            <div class="jumbotron-heading">
+                ABOUT US
+            </div>
+            <div class="jumbotron-body">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

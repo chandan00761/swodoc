@@ -31,7 +31,7 @@ if os.environ['CONFIG'] == 'PRODUCTION':
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['CONFIG'] == 'LOCAL'
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'web',
+    'posts',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.SWOUser'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

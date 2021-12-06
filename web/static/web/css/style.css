@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+}
+
+@font-face {
+    font-family: 'Bruno', serif;
+    src: url("../fonts/Bruno-Ace-SC-Regular.ttf") format("ttf");
+}
+
+@font-face {
+    font-family: 'Julius Sans One', sans-serif;
+    src: url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap");
+}
+
+.nav {
+    @apply absolute top-0 flex md:flex-row lg:flex-row
+}
+
+.nav-header {
+    font-family: 'Bruno', serif;
+}
+
+.body {
+    @apply mt-32
+}

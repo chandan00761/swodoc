@@ -8,3 +8,10 @@
 
 venv
 .venv
+
+# npm
+node_modules
+
+# testing
+.coverage
+geckodriver.log

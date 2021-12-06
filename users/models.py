@@ -54,3 +54,5 @@ class SWOUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = "user"
         verbose_name_plural = "users"
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name

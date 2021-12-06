@@ -1,0 +1,27 @@
+{
+  "name": "swodoc",
+  "version": "1.0.0",
+  "description": "SWODoc TailwindCSS toolchain",
+  "main": "index.js",
+  "scripts": {
+    "start": "postcss web/**/*.css -d static/tailwind --watch",
+    "build": "postcss web/**/*.css -d static/tailwind --env production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chandan00761/swodoc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chandan00761/swodoc/issues"
+  },
+  "homepage": "https://github.com/chandan00761/swodoc#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.4",
+    "postcss-cli": "^9.0.2",
+    "tailwindcss": "^2.2.19"
+  }
+}
