@@ -13,7 +13,7 @@ module.exports = {
         persianblue: "#3F37C9",
         ultramarineblue: "#4361EE",
         dodgerblue: "#4895EF",
-        vividskyblue: "#4CC9F0",
+        darkyellow: "#D9F9A5",
       }
     },
     fontFamily: {

@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.jumbotron{
+    background: linear-gradient(101.32deg, #6E0FA7 0.31%, #F72585 95.63%);
+}
+
+.jumbotron-heading {
+    font-family: 'Roboto', monospace;
+}
+
+.font-righteous {
+    font-family: 'Righteous', cursive;
+}
+
+.jumbotron-button{
+    font-family: 'Julius Sans One', sans-serif;
+    @apply border
+}
