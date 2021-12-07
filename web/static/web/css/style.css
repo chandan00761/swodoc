@@ -2,27 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+.swodoc {
+    text-shadow:
+        -1px 0 #F72585, 0 1px #F72585, 1px 0 #F72585, 0 -1px #F72585,
+        -1px -1px #F72585, 1px 1px #F72585, -1px 1px #F72585, 1px -1px #F72585;
 }
 
-@font-face {
-    font-family: 'Bruno', serif;
-    src: url("../fonts/Bruno-Ace-SC-Regular.ttf") format("ttf");
-}
-
-@font-face {
+.nav-item{
     font-family: 'Julius Sans One', sans-serif;
-    src: url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap");
-}
-
-.nav {
-    @apply absolute top-0 flex md:flex-row lg:flex-row
-}
-
-.nav-header {
-    font-family: 'Bruno', serif;
-}
-
-.body {
-    @apply mt-32
+    @apply py-4 px-3 text-xl
 }

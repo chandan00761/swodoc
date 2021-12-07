@@ -9,23 +9,95 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SWO - Home</title>
     <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'web/css/fonts.css' %}">
     {% block stylesheets %}
     {% endblock %}
     {% block headblock %}
     {% endblock %}
 </head>
 <body>
-<div class="nav">
-    <div class="nav-header">
-        SWODoc
+<nav class="bg-white shadow-sm">
+    <div class="px-4">
+        <div class="flex justify-between">
+            <div class="flex w-full">
+                <!-- website logo -->
+                <div class="py-0.5">
+                    <a href="#">
+							<span class="swodoc text-pink text-4xl"
+                                  style="font-family: Bruno, serif;"
+                            >
+                                SWODoc
+                            </span>
+                    </a>
+                </div>
+                <!-- Primary Navbar items -->
+                <div class="hidden md:flex ml-auto items-center space-x-5">
+                    <a
+                            href="{% url 'index' %}"
+                            class="nav-item"
+                    >Home</a
+                    >
+                    <a
+                            href=""
+                            class="nav-item"
+                    >Services</a
+                    >
+                    <a
+                            href=""
+                            class="nav-item"
+                    >About</a
+                    >
+                    <a
+                            href=""
+                            class="nav-item"
+                    >Contact Us</a
+                    >
+                </div>
+                <!-- Mobile menu button -->
+                <div class="ml-auto md:hidden flex items-center">
+                    <button class="outline-none mobile-menu-button">
+                        <svg
+                                class="w-6 h-6 text-gray-500"
+                                x-show="!showMenu"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                        >
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="">
-        LOGIN
+    <!-- Mobile menu -->
+    <div class="hidden mobile-menu">
+        <ul class="flex flex-col space-y-3 px-2">
+            <li><a href=""
+                   class="nav-item">Home</a>
+            </li>
+            <li><a href=""
+                   class="nav-item">Services</a>
+            </li>
+            <li><a href=""
+                   class="nav-item">About</a>
+            </li>
+            <li><a href=""
+                   class="nav-item">Contact Us</a>
+            </li>
+        </ul>
     </div>
-</div>
+</nav>
 <div class="body">
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 </div>
+<script type="text/javascript"
+        src="{% static 'web/js/script.js' %}"></script>
+{% block scripts %}
+{% endblock %}
 </body>
 </html>
