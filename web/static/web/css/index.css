@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.jumbotron{
+.welcome {
     background: linear-gradient(101.32deg, #6E0FA7 0.31%, #F72585 95.63%);
+}
+
+#aboutus {
+    background: linear-gradient(98.37deg, #560BAD 0%, #4E1BB7 34.69%, #493AD0 60.08%, #4552E2 75.94%, #4361EE 99.46%);
+}
+
+.jumbotron {
+    @apply mt-5 w-10/12 mx-auto rounded-xl pb-4 px-8 text-white;
 }
 
 .jumbotron-heading {
@@ -14,7 +22,59 @@
     font-family: 'Righteous', cursive;
 }
 
-.jumbotron-button{
+.jumbotron-button {
     font-family: 'Julius Sans One', sans-serif;
-    @apply border
+}
+
+.jumbotron-heading {
+    @apply text-2xl;
+}
+
+.jumbotron-footer {
+    @apply flex py-8 flex-col items-center;
+}
+
+.about-flex {
+    @apply flex mt-8 w-full;
+}
+
+.jumbotron-button {
+    @apply border mb-3 w-32 px-4 py-0.5 rounded-sm;
+}
+
+.showcase-img {
+    width: 300px;
+    height: 225px;
+}
+
+.card-subtitle {
+    font-family: 'Roboto', monospace;
+    @apply text-center;
+}
+
+@screen md {
+    .jumbotron {
+        @apply pt-8 px-24 w-9/12 pb-8;
+    }
+
+    .jumbotron-footer {
+        @apply flex-row mt-16 justify-around;
+    }
+
+    .jumbotron-button {
+        @apply mb-0 ;
+    }
+
+    .jumbotron-button:hover {
+        @apply bg-pink;
+    }
+
+    .jumbotron-heading {
+        @apply text-3xl;
+    }
+
+    .about-flex {
+        @apply flex-row justify-between;
+    }
+
 }

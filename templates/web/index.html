@@ -4,13 +4,14 @@
 {# Home page of the application #}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static 'web/css/index.css' %}">
+    <link rel="stylesheet" href="../../static/tailwind/index.css">
 {% endblock %}
 
 {% block content %}
-    <div class="showcase mt-5">
-        <div class="jumbotron w-10/12 mx-auto rounded-xl pb-4 pt-8 px-8 text-white md:px-24 md:w-9/12 md:pt-24 md:pb-8">
-            <div class="jumbotron-heading text-2xl md:text-3xl">
+    <div class="showcase">
+        <!-- start of splash jumbotron -->
+        <div class="jumbotron pt-8 md:pt-24 welcome">
+            <div class="jumbotron-heading">
                 WELCOME TO
             </div>
             <div class="jumbotron-body font-righteous text-3xl md:text-4xl">
@@ -18,22 +19,59 @@
                 <br>
                 MNNIT ALLAHABAD
             </div>
-            <div class="jumbotron-footer flex py-8 flex-col items-center md:flex-row md:mt-16 md:justify-around">
-                <button class="jumbotron-button border mb-3 w-32 px-4 py-0.5 rounded-sm md:mb-0 hover:bg-darkyellow">
+            <div class="jumbotron-footer">
+                <button class="jumbotron-button">
                     JOIN US
                 </button>
-                <button class="jumbotron-button border w-32 px-4 py-0.5 rounded-sm hover:bg-darkyellow">
+                <button class="jumbotron-button">
                     ABOUT US
                 </button>
             </div>
         </div>
-        <div>
-            <div class="jumbotron-heading">
+        <!-- end of splash jumbotron -->
+        <!-- start of about us jumbotron -->
+        <div id="aboutus" class="jumbotron md:mt-20">
+            <div class="jumbotron-heading text-center">
                 ABOUT US
             </div>
             <div class="jumbotron-body">
-
+                <div class="about-flex">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{% static 'web/img/website.svg' %}"
+                                 alt="Website Design and Development"
+                                 class="showcase-img"
+                            >
+                        </div>
+                        <div class="card-subtitle">
+                            Web Design and Development
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{% static 'web/img/backend.svg' %}"
+                                 alt="Backend Development"
+                                 class="showcase-img"
+                            >
+                        </div>
+                        <div class="card-subtitle">
+                            Backend Development
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{% static 'web/img/mobile.svg' %}"
+                                 alt="Mobile Applications"
+                                 class="showcase-img"
+                            >
+                        </div>
+                        <div class="card-subtitle">
+                            Mobile Applications
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- end of about us jumbotron -->
     </div>
 {% endblock %}
