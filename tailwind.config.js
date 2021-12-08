@@ -11,7 +11,7 @@ module.exports = {
         trypanblue: "#480CA8",
         darktrypanblue: "#3A0CA3",
         persianblue: "#3F37C9",
-        ultramarineblue: "#4361EE",
+        ultramarineblue: "#493AD0",
         dodgerblue: "#4895EF",
         darkyellow: "#D9F9A5",
       }

@@ -1,0 +1,45 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="../../static/tailwind/signup.css">
+{% endblock %}
+
+{% block content %}
+    <div class="signup-jumbotron">
+        <div class="flex flex-row">
+            <div class="signup-label rounded-tl-xl active">
+                SIGN UP
+            </div>
+            <div class="signup-label rounded-tr-xl">
+                LOG IN
+            </div>
+        </div>
+        <div class="px-8 py-8">
+            <form action="{% url 'user_signup' %}" method="post">
+                {% csrf_token %}
+                <div class="form-input">
+                    <label for="email-signup">EMAIL</label>
+                    <input type="email" name="email_signup" id="email_signup">
+                </div>
+                <input class="submit" type="submit" value="SIGN UP">
+            </form>
+            <form class="hidden" action="" method="post">
+                {% csrf_token %}
+                <div class="form-input">
+                    <label for="email-login">EMAIL</label>
+                    <input type="email" name="email-login" id="email-login">
+                </div>
+                <div class="form-input mt-8">
+                    <label for="password">PASSWORD</label>
+                    <input type="password" name="password" id="password">
+                </div>
+                <input class="submit" type="submit" value="LOG IN">
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'web/js/signup.js' %}"></script>
+{% endblock %}

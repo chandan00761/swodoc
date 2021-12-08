@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.signup-label {
+    font-family: Bruno, serif;
+    @apply border-b-4 border-pink cursor-pointer py-2 text-base font-bold flex-grow text-center;
+}
+
+div.active{
+    @apply bg-pink text-white;
+}
+
+.signup-label:not(.active):hover{
+    color: #F72585;
+}
+
+.signup-jumbotron {
+    @apply rounded-xl mt-16 mx-auto w-4/5 border border-pink;
+}
+
+.form-input {
+    @apply border flex flex-col border-ultramarineblue rounded-md
+}
+
+.form-input > label{
+    @apply text-lg block border-ultramarineblue px-4 py-1
+}
+
+.form-input > input {
+    @apply py-1 px-4 w-full rounded-br-md rounded-bl-md text-lg
+}
+
+.submit {
+    @apply mt-16 w-36 px-4 text-base py-2 cursor-pointer font-extrabold self-center rounded-md text-white bg-darktrypanblue transition duration-300
+}
+
+.submit:hover{
+    @apply bg-ultramarineblue
+}
+
+form {
+    @apply flex flex-col mt-16
+}
+
+form>div>label{
+    font-family: 'Julius Sans One', sans-serif;
+}
+
+form>input[type=submit] {
+    font-family: 'Julius Sans One', sans-serif;
+}
+
+@screen md {
+
+    .signup-jumbotron{
+        @apply w-3/5;
+    }
+
+    .form-input{
+        @apply flex-row
+    }
+
+    .signup-label{
+        @apply text-xl;
+    }
+
+    .form-input > label{
+        @apply border-r
+    }
+
+    .form-input > input {
+        @apply rounded-bl-none rounded-r-md;
+    }
+
+    .submit {
+        @apply text-lg;
+    }
+
+    form {
+        @apply mx-10;
+    }
+}
