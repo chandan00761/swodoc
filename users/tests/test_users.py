@@ -37,6 +37,7 @@ class UserTest(TestCase):
         user = user_model.objects.create_user(email="test@test.com")
         self.assertIsInstance(user, SWOUser)
         self.assertEqual(user.email, "test@test.com")
+        self.assertFalse(user.is_active)
 
     def test_create_superuser(self):
         """
@@ -49,3 +50,4 @@ class UserTest(TestCase):
         self.assertTrue(user.is_superuser)
         self.assertEqual(user.email, "admin@admin.com")
         self.assertTrue(user.is_staff)
+        self.assertTrue(user.is_active)

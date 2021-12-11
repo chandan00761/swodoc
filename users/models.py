@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models \
-    import AbstractBaseUser, PermissionsMixin, BaseUserManager
+    import AbstractUser, PermissionsMixin, BaseUserManager
+from django.utils.translation import ugettext_lazy as _
 
 
 class SWOUserManager(BaseUserManager):
@@ -23,8 +24,13 @@ class SWOUserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **kwargs):
+        """
+        Helper function to create users.
+        sets is_staff, is_superuser, is_active to False by default
+        """
         kwargs.setdefault("is_superuser", False)
         kwargs.setdefault("is_staff", False)
+        kwargs.setdefault("is_active", False)
         return self._create_user(email, password, **kwargs)
 
     def create_superuser(self, email, password, **kwargs):
@@ -32,18 +38,16 @@ class SWOUserManager(BaseUserManager):
             raise ValueError("Password is required!")
         kwargs.setdefault("is_superuser", True)
         kwargs.setdefault("is_staff", True)
+        kwargs.setdefault("is_active", True)
         return self._create_user(email=email, password=password, **kwargs)
 
 
-class SWOUser(AbstractBaseUser, PermissionsMixin):
+class SWOUser(AbstractUser):
     """
     SWOUser is used to keep track of the users in the system.
     """
-
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=512, null=False, blank=False)
-    last_name = models.CharField(max_length=512, null=False, blank=False)
-    is_staff = models.BooleanField(null=False, default=False)
+    username = None
+    email = models.EmailField(_('Email Address'), unique=True)
 
     objects = SWOUserManager()
 
@@ -55,4 +59,7 @@ class SWOUser(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "users"
 
     def __str__(self):
+        return self.email
+
+    def get_name(self):
         return self.first_name + " " + self.last_name

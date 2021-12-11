@@ -8,32 +8,41 @@
 {% block content %}
     <div class="signup-jumbotron">
         <div class="flex flex-row">
-            <div class="signup-label rounded-tl-xl active">
+            <div class="signup-label rounded-tl-xl {% if login %} {% else %} active {% endif %}">
                 SIGN UP
             </div>
-            <div class="signup-label rounded-tr-xl">
+            <div class="signup-label rounded-tr-xl {% if login %} active {% endif %}">
                 LOG IN
             </div>
         </div>
         <div class="px-8 py-8">
-            <form action="{% url 'user_signup' %}" method="post">
+            <form class="{% if login %} hidden {% else %} active {% endif %}" {% if login %} {% else %} action="{% url 'signup' %}" {% endif %} method="post">
                 {% csrf_token %}
                 <div class="form-input">
-                    <label for="email-signup">EMAIL</label>
-                    <input type="email" name="email_signup" id="email_signup">
+                    <label for="email_signup">EMAIL</label>
+                    <input type="email" name="email_signup" id="email_signup" required>
                 </div>
+                {% if signup_errors %}
+                    <div class="text-center text-red-700">{{ signup_errors.email_signup }}</div>
+                {% endif %}
+                {% if signup_status %}
+                    <div class="text-center text-green-800">{{ signup_status }}</div>
+                {% endif %}
                 <input class="submit" type="submit" value="SIGN UP">
             </form>
-            <form class="hidden" action="" method="post">
+            <form class="{% if login %}active{% else %}hidden{% endif %}" action="{% url 'login' %}" method="post">
                 {% csrf_token %}
                 <div class="form-input">
-                    <label for="email-login">EMAIL</label>
-                    <input type="email" name="email-login" id="email-login">
+                    <label for="email_login">EMAIL</label>
+                    <input type="email" name="email_login" id="email_login">
                 </div>
                 <div class="form-input mt-8">
                     <label for="password">PASSWORD</label>
                     <input type="password" name="password" id="password">
                 </div>
+                {% if login_errors %}
+                    <div class="text-center text-red-700">{{ login_errors }}</div>
+                {% endif %}
                 <input class="submit" type="submit" value="LOG IN">
             </form>
         </div>
