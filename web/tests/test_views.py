@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.shortcuts import reverse
 
 from users.models import SWOUser
+from posts.models import Project
 
 
 class WebViewTests(TestCase):
@@ -73,3 +74,65 @@ class WebViewTests(TestCase):
         }
         response = self.client.post(self.root_url + reverse('login'), data=data)
         self.assertTrue(response.status_code, 200)
+
+    def test_docs_view(self):
+        """
+        Tests if the projects objects are returned correctly.
+        """
+
+        # creating three types of project
+        project_public = Project.objects.create(name="public project1", public=True, visibilty=True,
+                                                description="public project visible to anyone")
+        project_private = Project.objects.create(name="private project1", public=False, visibilty=True,
+                                                 description="private project but visible to mnnit members")
+        project_private_hidden = Project.objects.create(name="private project1", public=False, visibilty=False,
+                                                        description="private project visible to only "
+                                                                    "moderators and developers")
+
+        project_public.save()
+        project_private.save()
+        project_private_hidden.save()
+
+        # creating three types of users.
+
+        user = SWOUser.objects.create_user(email="test_user@mnnit.ac.in", password="test@123")
+        user_moderator = SWOUser.objects.create_user(email="test_mod@mnnit.ac.in", password="test@123")
+        user.is_active = True
+        user_moderator.is_active = True
+        user.save()
+        user_moderator.save()
+
+        # not signed in user should see only public projects
+
+        response = self.client.get(self.root_url + reverse('docs'))
+
+        self.assertEqual(len(response.context["projects"]), 1)
+
+        for project in response.context["projects"]:
+            self.assertTrue(project.public)
+            self.assertTrue(project.visibilty)
+
+        # signed in user but not a developer or maintainer should see all the public and all the visible projects
+
+        self.client.login(email=user.email, password="test@123")
+        response = self.client.get(self.root_url + reverse('docs'))
+
+        self.assertEqual(len(response.context["projects"]), 2)
+
+        for project in response.context["projects"]:
+            self.assertTrue(project.visibilty)
+
+        # signed in moderator should see all the projects that are public, visible and user is moderator of
+        # checking for developers should also be similar.
+
+        project_private_hidden.moderators.add(user_moderator)
+        project_private_hidden.save()
+
+        self.client.logout()
+        self.client.login(email=user_moderator.email, password="test@123")
+
+        response = self.client.get(self.root_url + reverse('docs'))
+
+        self.assertEqual(len(response.context["projects"]), 3)
+        for project in response.context["projects"]:
+            self.assertTrue(project.visibilty or project.moderators.filter(email=user_moderator.email).exists())
