@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block headblock %}
+    <title>SWODoc - Docs</title>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="../../static/tailwind/docs.css"/>
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {# TODO change this url to point to custom form #}
+        <a href="{% url 'admin:posts_project_add' %}">
+        <button class="bg-pink rounded-md py-2 px-4 mt-2 ml-10 text-white">
+          <span class="font-extrabold">+</span> Create project.
+        </button>
+        </a>
+    {% endif %}
+    <div class="projects">
+        {% for project in projects %}
+            <div class="card">
+                <h2>{{ project.name }}</h2>
+                <br>
+                <p>{{ project.description }}</p>
+                <div class="icons">
+                    <a title="source code" href="{{ project.source_code_url|default_if_none:"" }}" target="_blank"><img alt="source code"
+                                                                                                     src="{% static 'web/img/iconmonstr-code-10.svg' %}"/></a>
+                    <a title="deployed app" href="{{ project.deployment_code|default_if_none:"" }}"><img
+                            src="{% static 'web/img/iconmonstr-upload-17.svg' %}"
+                            alt="deployed application"/></a>
+                    <a title="documentation" href=""><img src="{% static 'web/img/iconmonstr-note-11.svg' %}"
+                                                          alt="documentation"/></a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-project text-4xl md:text-6xl absolute">
+                404 No projects present!
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from posts.models import Project
+from posts.models import Project, Post
 from users.models import SWOUser
 
 
@@ -20,3 +20,16 @@ class ProjectTests(TestCase):
         self.assertIsInstance(project, Project)
         self.assertEqual(project.name, "SWODoc")
         self.assertGreater(Project.objects.filter(moderators=moderator).count(), 0)
+
+
+class PostTests(TestCase):
+    """
+    Tests related to the Post model are defined here.
+    """
+
+    def test_post_model_create(self):
+        """
+        Tests wheter project model can be created successfully.
+        """
+
+        posts = Post.objects.create(name="title")

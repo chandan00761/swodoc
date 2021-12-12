@@ -1,9 +1,12 @@
+from django.views.decorators.http import require_safe
 from django.shortcuts import render, redirect, reverse
+from django.db.models import Q
 from django.db.utils import IntegrityError
 from django.contrib.auth import authenticate, login as d_login
 
 from web.forms import SignupForm, LoginForm
 from users.models import SWOUser
+from posts.models import Project
 
 
 def signup(request):
@@ -71,3 +74,21 @@ def login(request):
 
 def profile(request):
     return request.user.email
+
+
+@require_safe
+def docs(request):
+    """
+    This view returns all the public projects if the user is not authenticated
+    else returns all the visible projects and projects in which the user is a
+    moderator or developer.
+    """
+
+    projects = None
+    if request.user is None:
+        projects = Project.objects.filter(public=True)
+    else:
+        projects = Project.objects.filter(Q(visibilty=True) | Q(moderators=request.user) | Q(developers=request.user))
+    return render(request, "web/docs.html", {
+        "projects": projects
+    })

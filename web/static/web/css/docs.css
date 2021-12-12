@@ -1,0 +1,48 @@
+@tailwind utilities;
+@tailwind components;
+@tailwind base;
+
+/*
+*/
+
+.card {
+    @apply bg-dodgerblue text-white px-8 w-2/3 py-4 rounded-lg;
+}
+
+.projects{
+    grid-auto-rows: 1fr;
+    @apply grid grid-cols-1 gap-y-10 justify-items-center my-10;
+}
+
+.card > h2 {
+    font-family: Bruno, serif;
+    @apply text-white text-center font-extrabold text-2xl;
+}
+
+.card > p {
+    font-family: Roboto, monospace;
+}
+
+.card > .icons{
+    @apply flex flex-row justify-around pt-8 ;
+}
+
+.empty-project{
+    font-family: Righteous, serif;
+    color: red;
+}
+
+@screen md {
+    .card {
+        @apply w-3/4;
+    }
+    .projects{
+        @apply grid-cols-3;
+    }
+}
+
+@screen lg {
+    .projects {
+        @apply grid-cols-4;
+    }
+}

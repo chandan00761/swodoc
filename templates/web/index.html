@@ -1,7 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include 'base.html' %}
 
 {# Home page of the application #}
+
+{% block headblock %}
+    <title>SWODoc - Home</title>
+{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="../../static/tailwind/index.css">

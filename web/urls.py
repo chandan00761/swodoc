@@ -10,4 +10,5 @@ urlpatterns = [
     path("login/", web_views.login, name="login"),
     path("profile/", web_views.profile, name="profile"),
     path("logout/", LogoutView.as_view(template_name="web/index.html"), name="logout"),
+    path("docs/", web_views.docs, name="docs"),
 ]

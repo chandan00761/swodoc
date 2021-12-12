@@ -7,7 +7,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SWO - Home</title>
     <link rel="stylesheet" href="../../static/tailwind/style.css">
     <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'web/css/fonts.css' %}">
@@ -39,7 +38,7 @@
                     >Home</a
                     >
                     <a
-                            href=""
+                            href="{% url 'docs' %}"
                             class="nav-item"
                     >Docs</a
                     >
@@ -93,7 +92,7 @@
             <li><a href=""
                    class="nav-item">Home</a>
             </li>
-            <li><a href=""
+            <li><a href="{% url 'docs' %}"
                    class="nav-item">Docs</a>
             </li>
             <li><a href=""
