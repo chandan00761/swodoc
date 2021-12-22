@@ -1,5 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include 'base.html' %}
+
+{% block navigation %}
+    {% include 'components/navbar.html' %}
+{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="../../static/tailwind/signup.css">

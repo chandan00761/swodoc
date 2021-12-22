@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ page.project.name }} - {{ page.name }}
+{% endblock %}
+
+{% block navigation %}
+    {% include 'components/navbar.html' %}
+{% endblock %}
+
+{% block headblock %}
+    <link href="{% static 'web/css/page.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+    <div class="mt-10 w-3/5 mx-auto page">
+        {% for post in page.post_set.all %}
+            {% if post.title %}
+                <h1 class="text-5xl font-bold mb-5">{{ post.title }}</h1>
+            {% endif %}
+            {% if post.body %}
+                <div class="text-lg mb-10">
+                    {{ post.body }}
+                </div>
+            {% else %}
+                <img class="mx-auto" alt="{{ post.image }}" src="{{ post.image.url }}">
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

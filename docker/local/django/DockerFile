@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt .
+COPY ./requirements.txt /usr/src/app
 
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc \
@@ -12,5 +12,5 @@ RUN apt-get update \
 
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY . /usr/src/app
 

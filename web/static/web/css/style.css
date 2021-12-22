@@ -12,3 +12,15 @@
     font-family: 'Julius Sans One', sans-serif;
     @apply py-4 px-3 text-xl
 }
+
+.search {
+    @apply flex-1;
+}
+
+.search input {
+    @apply border rounded-md px-4 py-2
+}
+
+.search input:focus {
+    @apply w-144;
+}

@@ -3,12 +3,16 @@
 
 {# Home page of the application #}
 
-{% block headblock %}
-    <title>SWODoc - Home</title>
+{% block title %}
+    SWODoc - Home
 {% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="../../static/tailwind/index.css">
+{% endblock %}
+
+{% block navigation %}
+    {% include 'components/navbar.html' %}
 {% endblock %}
 
 {% block content %}

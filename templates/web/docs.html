@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block headblock %}
-    <title>SWODoc - Docs</title>
+{% block title %}
+    SWODoc - Docs
 {% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="../../static/tailwind/docs.css"/>
+{% endblock %}
+
+{% block navigation %}
+    {% include 'components/navbar.html' %}
 {% endblock %}
 
 {% block content %}
@@ -30,7 +34,7 @@
                     <a title="deployed app" href="{{ project.deployment_code|default_if_none:"" }}"><img
                             src="{% static 'web/img/iconmonstr-upload-17.svg' %}"
                             alt="deployed application"/></a>
-                    <a title="documentation" href=""><img src="{% static 'web/img/iconmonstr-note-11.svg' %}"
+                    <a title="documentation" href="{% url 'project' project_id=project.pk %}"><img src="{% static 'web/img/iconmonstr-note-11.svg' %}"
                                                           alt="documentation"/></a>
                 </div>
             </div>

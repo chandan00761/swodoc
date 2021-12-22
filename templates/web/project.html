@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ project.name }}
+{% endblock %}
+{% block navigation %}
+    {% include 'components/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="mt-10 w-3/5 mx-auto">
+        <div class="mb-10 text-xl">
+            {{ project.description }}
+        </div>
+        {% for page in project.page_set.all %}
+
+            <details>
+                <summary class="text-xl border p-4">
+                    <a href="{% url 'page' project_id=project.pk page_id=page.pk %}">{{ page.name }}</a>
+                </summary>
+                <section class="px-10 border p-2">
+                    {% for post in page.post_set.all %}
+                        {% if post.body %}
+                            <a href="">{{ post.title | default_if_none:"" }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </section>
+            </details>
+        {% endfor %}
+    </div>
+{% endblock %}

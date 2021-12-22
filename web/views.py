@@ -1,5 +1,6 @@
+from django.http import Http404
 from django.views.decorators.http import require_safe
-from django.shortcuts import render, redirect, reverse
+from django import shortcuts
 from django.db.models import Q
 from django.db.utils import IntegrityError
 from django.contrib.auth import authenticate, login as d_login
@@ -17,7 +18,7 @@ def signup(request):
     """
 
     if request.method == "GET":
-        return render(request, "web/signup.html", {
+        return shortcuts.render(request, "web/signup.html", {
             "signup_form": SignupForm(),
             "login_form": LoginForm()
         })
@@ -29,16 +30,16 @@ def signup(request):
                 user = SWOUser.objects.create_user(email=form.cleaned_data["email_signup"])
                 user.save()
             except IntegrityError:
-                return render(request, "web/signup.html", {
+                return shortcuts.render(request, "web/signup.html", {
                     "signup_errors":
                         {
                             "email_signup": "Email ID already exists!"
                         },
                 })
-            return render(request, "web/signup.html", {
+            return shortcuts.render(request, "web/signup.html", {
                 "signup_status": "Check your email for further instructions."
             })
-        return render(request, "web/signup.html", {
+        return shortcuts.render(request, "web/signup.html", {
             "signup_errors": form.errors,
         })
 
@@ -49,7 +50,7 @@ def login(request):
     from POST request.
     """
     if request.method == "GET":
-        return render(request, "web/signup.html", {
+        return shortcuts.render(request, "web/signup.html", {
             "login": True
         })
 
@@ -58,15 +59,15 @@ def login(request):
         user = authenticate(email=form.cleaned_data["email_login"],
                             password=form.cleaned_data["password"])
         if user is None:
-            return render(request, "web/signup.html", {
+            return shortcuts.render(request, "web/signup.html", {
                 "login": True,
                 "login_errors": "Email or password is wrong!"
             })
         else:
             d_login(request, user)
-            return redirect(reverse('index'))
+            return shortcuts.redirect(shortcuts.reverse('index'))
 
-    return render(request, "web/signup.html", {
+    return shortcuts.render(request, "web/signup.html", {
         "login": True,
         "login_errors": form.errors
     })
@@ -83,12 +84,30 @@ def docs(request):
     else returns all the visible projects and projects in which the user is a
     moderator or developer.
     """
-
     projects = None
-    if request.user is None:
+    if request.user is None or request.user.is_anonymous:
         projects = Project.objects.filter(public=True)
     else:
-        projects = Project.objects.filter(Q(visibilty=True) | Q(moderators=request.user) | Q(developers=request.user))
-    return render(request, "web/docs.html", {
+        projects = Project.objects.filter(Q(visibility=True) | Q(moderators=request.user) | Q(developers=request.user))
+    return shortcuts.render(request, "web/docs.html", {
         "projects": projects
+    })
+
+
+@require_safe
+def project_view(request, project_id: int):
+    project = shortcuts.get_object_or_404(Project, pk=project_id)
+    return shortcuts.render(request, "web/project.html", {
+        "project": project
+    })
+
+
+@require_safe
+def page_view(request, project_id: int, page_id: int):
+    project = shortcuts.get_object_or_404(Project, pk=project_id)
+    page = project.page_set.get(pk=page_id)
+    if page is None:
+        raise Http404()
+    return shortcuts.render(request, "web/page.html", {
+        "page": page
     })

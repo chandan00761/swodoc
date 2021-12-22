@@ -110,7 +110,7 @@ class WebViewTests(TestCase):
 
         for project in response.context["projects"]:
             self.assertTrue(project.public)
-            self.assertTrue(project.visibilty)
+            self.assertTrue(project.visibility)
 
         # signed in user but not a developer or maintainer should see all the public and all the visible projects
 
@@ -120,7 +120,7 @@ class WebViewTests(TestCase):
         self.assertEqual(len(response.context["projects"]), 2)
 
         for project in response.context["projects"]:
-            self.assertTrue(project.visibilty)
+            self.assertTrue(project.visibility)
 
         # signed in moderator should see all the projects that are public, visible and user is moderator of
         # checking for developers should also be similar.
@@ -135,4 +135,20 @@ class WebViewTests(TestCase):
 
         self.assertEqual(len(response.context["projects"]), 3)
         for project in response.context["projects"]:
-            self.assertTrue(project.visibilty or project.moderators.filter(email=user_moderator.email).exists())
+            self.assertTrue(project.visibility or project.moderators.filter(email=user_moderator.email).exists())
+
+        self.client.logout()
+
+    def test_project_view(self):
+        """
+        Test if the project view returns the correct project given project id.
+        """
+        project = Project.objects.create(name="public project1", public=True, visibilty=True,
+                                                description="public project visible to anyone")
+        project.save()
+
+        response = self.client.get(self.root_url + reverse('project', kwargs={
+            'project_id': project.pk
+        }))
+
+        self.assertEqual(project.pk, response.context["project"].pk)
